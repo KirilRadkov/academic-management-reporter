@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="Kiril Radkov">
+        <createTable tableName="student">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="age" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="Kiril Radkov">
+        <createTable tableName="teacher">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="age" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="Kiril Radkov">
+        <createTable tableName="student_courses">
+            <column name="student_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="course" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="student_courses"
+                                 baseColumnNames="student_id"
+                                 referencedTableName="student"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_student_courses_student"/>
+    </changeSet>
+
+    <changeSet id="4" author="Kiril Radkov">
+        <createTable tableName="student_groups">
+            <column name="student_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="group_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="student_groups"
+                                 baseColumnNames="student_id"
+                                 referencedTableName="student"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_student_groups_student"/>
+    </changeSet>
+
+    <changeSet id="5" author="Kiril Radkov">
+        <createTable tableName="teacher_groups">
+            <column name="teacher_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="group_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="teacher_groups"
+                                 baseColumnNames="teacher_id"
+                                 referencedTableName="teacher"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_teacher_groups_teacher"/>
+    </changeSet>
+
+    <changeSet id="6" author="Kiril Radkov">
+        <createTable tableName="teacher_courses">
+            <column name="teacher_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="course" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="teacher_courses"
+                                 baseColumnNames="teacher_id"
+                                 referencedTableName="teacher"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_teacher_courses_student"/>
+    </changeSet>
+
+</databaseChangeLog>
